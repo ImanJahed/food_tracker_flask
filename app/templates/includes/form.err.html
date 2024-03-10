@@ -1,0 +1,9 @@
+{% if form.errors %}
+{% for field_name, field_err in form.errors|dictsort if field_err %}
+{% for err in field_err %}
+<div class="alert alert-danger">
+    {{err}}
+</div>
+{% endfor %}
+{% endfor %}
+{% endif %}

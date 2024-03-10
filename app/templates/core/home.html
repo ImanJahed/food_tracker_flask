@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% set active_page = 'index' %}
+{% block title%} Home {% endblock title %}
+
+
+{% block content %}
+<div>
+  <form method="POST" action="">
+    {{form.csrf_token}}
+    <div class="form-group">
+      {{form.day.label(for='new-day')}}
+      {{form.day(class='form-control', id='new-day')}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+
+  <div class="page-header"></div>
+  {% for d in days %}
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{d.date.strftime('%B %d, %Y')}}</h3>
+    </div>
+    <div class="panel-body">
+      {% for food in d.dates %}
+      <ul class="nav nav-pills" role="tablist">
+        <li>
+          <a>Protein: <span class="badge">{{food.protein}}</span></a>
+        </li>
+        <li>
+          <a>Carbohydrates: <span class="badge">{{food.carbohydrates}}</span></a>
+        </li>
+        <li>
+          <a>Fat: <span class="badge">{{food.fat}}</span></a>
+        </li>
+        <li>
+          <a>Calories: <span class="badge">{{food.calories}}</span></a>
+        </li>
+        <li><a href="{{url_for('core.day', date=d.date.strftime('%Y-%m-%d'))}}" type="button" class="btn btn-link">View
+            Detail</a>
+        </li>
+      </ul>
+      {% else %}
+      <ul class="nav nav-pills" role="tablist">
+        <li>
+          <a>Protein: <span class="badge">0</span></a>
+        </li>
+        <li>
+          <a>Carbohydrates: <span class="badge">0</span></a>
+        </li>
+        <li>
+          <a>Fat: <span class="badge">0</span></a>
+        </li>
+        <li>
+          <a>Calories: <span class="badge">0</span></a>
+        </li>
+        <li><a href="{{url_for('core.day', date=d.date.strftime('%Y-%m-%d'))}}" type="button" class="btn btn-link">View
+            Detail</a>
+        </li>
+      </ul>
+      {% endfor %}
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

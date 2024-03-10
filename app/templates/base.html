@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{%endblock title %}</title>
-</head>
-<body>
 
-    {% block content}
-    {% endblock content}
+<head>
+    <title>{% block title%}{% endblock %}</title>
+    {% include 'includes/head.html' %}
+</head>
+
+<body>
+    {% include 'includes/navbar.html' %}
+
+    <div class="container theme-showcase col-sm-6 col-sm-offset-3" role="main">
+        {% include 'includes/flash_message.html' %}
+        {% include 'includes/form.err.html' %}
+
+        <div class="row">
+            {% block content %}
+            {% endblock content %}
+        </div>
+
+
+    </div>
+
 </body>
-</html>
